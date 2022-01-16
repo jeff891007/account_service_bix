@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+<script th:src="@{/webjars/jquery/3.6.0/jquery.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.js}"></script>
+<link  th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.css}" rel="stylesheet">
+
+<style>
+table,table tr th, table tr td { border:1px solid #0094ff; }
+</style>
+
+</head>
+<body>
+
+    <div>
+        <p>
+            <label>customer id:</label> <span th:text="${cusId}"></span>
+        </p>
+        <p>
+            <label>customer name:</label> <span th:text="${cusName}"></span>
+        </p>
+        <hr>
+        <p>
+            <form action="/addService">
+	            <label>Service:</label>
+	            <select name="serviceId">
+	                <option th:each="ser:${serList}" 
+	                th:value="${ser.id}"
+	                th:text="${ser.name}">
+	                </option>
+	            </select>
+	            <br>
+	            <label>Comment:</label>
+	            <input name="comment" type="text"></input>
+	            <br>
+	            <input type="hidden" name="customerId" th:value="${cusId}" ></input>
+	            <input type="hidden" name="customerName" th:value="${cusName}" ></input>
+	            <input type="submit" value="Add"></input>
+            </form>
+        </p>
+    </div>
+
+    <table>
+        <tr>
+            <th>Service id</td>
+            <td>Service name</td>
+            <td>Comment</td>
+            <td>operation</td>
+        </tr>
+        <tr th:each="cs:${list}">
+            <td th:text="${cs.serviceId}"></td>
+            <td th:text="${cs.serviceName}"></td>
+            <td th:text="${cs.comment}"></td>
+            <td>
+                <a th:href="@{/delService/{csId}?customerId={customerId}&customerName={customerName}
+                    (csId=${cs.id},customerId=${cs.customerId},customerName=${cs.customerName})}" th:text="delete"></a>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

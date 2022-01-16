@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title></title>
+<script th:src="@{/webjars/jquery/3.6.0/jquery.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.js}"></script>
+<link  th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.css}" rel="stylesheet">
+
+<style>
+table,table tr th, table tr td { border:1px solid #0094ff; }
+</style>
+
+</head>
+<body>
+
+    <table>
+        <tr>
+            <th>customer id</td>
+            <td>customer name</td>
+            <td>operation</td>
+        </tr>
+        <tr th:each="cus:${list}">
+            <td th:text="${cus.id}"></td>
+            <td th:text="${cus.name}"></td>
+            <td>
+                <a th:href="@{/cusDetail/{cusId}?customerId={cusName}(cusId=${cus.id},cusName=${cus.name})}" th:text="detail"></a>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

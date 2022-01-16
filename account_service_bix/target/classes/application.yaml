@@ -1,0 +1,25 @@
+debug: true
+server: 
+    port: 8080
+
+spring: 
+    dataSource: 
+        url: jdbc:h2:~/test
+        driven-class-name: org.h2.Driver
+        username: sa
+        password: sa
+        type: com.alibaba.druid.pool.DruidDataSource
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+        maxWait: 60000
+        validationQuery: select 1 from dual
+        schema: classpath:schema-service-customer.sql
+        data: classpath:data-service-customer.sql
+        initialization-mode: ALWAYS
+    
+    thymeleaf: 
+        cache: false
+
+bix:
+    jwt-key: 123123
